@@ -4,14 +4,26 @@ import java.util.Scanner;
 
 public class Solution2 {
     public static void main(String[] args) {
+        Solution2 app = new Solution2();
+
+        app.run();
+    }
+
+    public void run() {
+        // 0. Set up
         Scanner scanner = new Scanner(System.in);
 
-        int angle = scanner.nextInt();
+        // 1. Input
+        Integer angle = scanner.nextInt();
 
-        System.out.println(angle % 360);
+        // 2. Process
+        Integer result = normalization(angle);
 
-        System.out.println(
-                "Math.floorMod(angle, 360) is " + Math.floorMod(angle, 360)
-        );
+        // 3. result
+        System.out.println(result);
+    }
+
+    public Integer normalization(Integer angle) {
+        return Math.floorMod(angle, 360);
     }
 }

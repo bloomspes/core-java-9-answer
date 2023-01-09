@@ -1,39 +1,33 @@
 package com.github.bloomspes;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class Solution3Test {
+    @Test
+    void maximum() {
+        Solution3 app = new Solution3();
 
-    private final String words = "Maximum number with ?: 9\n" +
-            "Maximum number with Math.max: 9\n";
+        assertThatThrownBy(() -> {
+            app.maximum(new int[]{});
+        }).isInstanceOf(RuntimeException.class);
 
-    private ByteArrayOutputStream byteArrayOutputStream;
-
-    @BeforeEach
-    void setUp() {
-        ByteArrayInputStream byteArrayInputStream =
-                new ByteArrayInputStream("7 8 9".getBytes());
-
-        this.byteArrayOutputStream = new ByteArrayOutputStream(
-                this.words.length() * 2
-        );
-
-        System.setIn(byteArrayInputStream);
-
-        System.setOut(new PrintStream(this.byteArrayOutputStream));
+        assertThat(app.maximum(new int[]{1})).isEqualTo(1);
+        assertThat(app.maximum(new int[]{1, 2})).isEqualTo(2);
+        assertThat(app.maximum(new int[]{1, 2, 3})).isEqualTo(3);
+        assertThat(app.maximum(new int[]{1, 2, 3, 4})).isEqualTo(4);
+        assertThat(app.maximum(new int[]{1, 2, 3, 5, 4})).isEqualTo(5);
     }
 
     @Test
-    void solution3() {
-        Solution3.main(null);
+    void maximum3() {
+        Solution3 app = new Solution3();
 
-        assertThat(this.words).isEqualTo(this.byteArrayOutputStream.toString());
+        assertThat(app.maximum3(new int[]{1, 2, 3})).isEqualTo(3);
+        assertThat(app.maximum3(new int[]{1, 3, 2})).isEqualTo(3);
+        assertThat(app.maximum3(new int[]{3, 2, 1})).isEqualTo(3);
+        assertThat(app.maximum3(new int[]{3, 1, 2})).isEqualTo(3);
     }
 }
